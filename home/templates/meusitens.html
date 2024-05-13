@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livro Fora da Estante - Meus Itens</title>
+    <style>
+        /* Estilos globais */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Estilos para a barra lateral */
+        .sidebar {
+            height: 100%;
+            width: 220px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #333;
+            overflow-x: hidden;
+            transition: width 0.3s ease; /* Adiciona transição suave para mudanças de largura */
+            padding-top: 60px;
+        }
+
+        /* Estilos para a lista de itens da barra lateral */
+        .sidebar ul {
+            padding: 0;
+            margin: 0;
+            list-style-type: none;
+            text-align: center; /* Centraliza os itens na barra lateral */
+        }
+
+        /* Estilos para os itens da barra lateral */
+        .sidebar li {
+            margin-bottom: 15px; /* Espaçamento entre os itens */
+        }
+
+        /* Estilos específicos para o último item da lista (Logout) */
+        .sidebar li:last-child {
+            margin-top: auto; /* Move o último item para o final da barra lateral */
+        }
+
+        /* Estilos para os links da barra lateral */
+        .sidebar a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #ccc;
+            display: block;
+            transition: color 0.3s ease; /* Adiciona transição suave para mudança de cor */
+        }
+
+        /* Estilo para os links da barra lateral quando passa o mouse */
+        .sidebar a:hover {
+            color: #fff;
+        }
+
+        /* Estilo para o conteúdo */
+        .content {
+            margin-left: 220px; /* Deixar espaço para a barra lateral */
+            padding: 20px;
+        }
+
+        /* Estilos para a tabela de itens */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        /* Estilos para os botões */
+        .button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Barra lateral -->
+<div class="sidebar" id="sidebar">
+    <ul>
+        <li><a href="index.html">Acervo</a></li>
+        <li><a href="perfil.html">Perfil</a></li>
+        <li><a href="conversas.html">Conversas</a></li>
+        <li><a href="meusitens.html">Meus Itens</a></li>
+        <li style="margin-top: 40px;"><a href="#">Logout</a></li>
+    </ul>
+</div>
+
+<!-- Conteúdo -->
+<div class="content" id="content">
+    <h1>Meus Itens</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Autor</th>
+                <th>Ano</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Nome do Livro 1</td>
+                <td>Autor do Livro 1</td>
+                <td>2022</td>
+                <td><button class="button">Editar</button> <button class="button">Excluir</button></td>
+            </tr>
+            <tr>
+                <td>Nome do Livro 2</td>
+                <td>Autor do Livro 2</td>
+                <td>2020</td>
+                <td><button class="button">Editar</button> <button class="button">Excluir</button></td>
+            </tr>
+            <!-- Adicione mais linhas conforme necessário -->
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
