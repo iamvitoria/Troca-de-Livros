@@ -48,4 +48,3 @@ class Usuario(AbstractBaseUser):
             self.bairro = data.get('bairro', '')
             self.cidade = data.get('localidade', '')
             self.estado = data.get('uf', '')
-
