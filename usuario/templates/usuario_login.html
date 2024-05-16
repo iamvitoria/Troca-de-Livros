@@ -89,24 +89,25 @@
 <body>
     <div class="login-container">
         <h2>Login</h2>
-        <form method="post">
+        <form method="post" action="{% url 'usuario_login' %}">
             {% csrf_token %}
             <div>
-                <label for="id_email">Email:</label>
-                <input type="email" id="id_email" name="email" required>
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" required>
             </div>
             <div>
-                <label for="id_password">Senha:</label>
-                <input type="password" id="id_password" name="password" required>
+                <label for="password">Senha:</label>
+                <input type="password" id="password" name="password" required>
             </div>
             <div>
-                <input type="submit" value="Entrar">
+                <input type="submit" value="Login">
             </div>
             {% if error_message %}
-            <p class="error-message">{{ error_message }}</p>
+                <p class="error-message">{{ error_message }}</p>
             {% endif %}
         </form>
-        <p>Ainda não possui uma conta? <a href="{% url 'usuario_registro' %}">Registre-se aqui</a></p>
+        <!-- Adicione o link para a página de registro aqui -->
+        <p>Não tem uma conta? <a href="{% url 'usuario_registro' %}">Registrar-se</a></p>
     </div>
 </body>
 </html>

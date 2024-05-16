@@ -3,6 +3,8 @@ from .models import Usuario
 import requests
 
 class UsuarioForm(forms.ModelForm):
+    senha = forms.CharField(widget=forms.PasswordInput())
+    confirmarSenha = forms.CharField(widget=forms.PasswordInput())
     cep = forms.CharField(label='CEP', max_length=9)
 
     class Meta:
@@ -37,3 +39,10 @@ class UsuarioForm(forms.ModelForm):
             self.add_error('cpf', forms.ValidationError("Este CPF já está em uso"))
 
         return cleaned_data
+    
+    def clean_confirmarSenha(self):
+        senha = self.cleaned_data.get('senha')
+        confirmarSenha = self.cleaned_data.get('confirmarSenha')
+        if senha and confirmarSenha and senha != confirmarSenha:
+            raise forms.ValidationError("As senhas não coincidem.")
+        return confirmarSenha

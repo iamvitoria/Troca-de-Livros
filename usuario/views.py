@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
-from .forms import UsuarioForm
+from django.contrib import messages
+from django.http import JsonResponse
 from django.contrib.auth import authenticate, login
+from .models import Usuario
+from .forms import UsuarioForm
 
 def login_usuario(request):
     error_message = None
@@ -25,6 +28,7 @@ def registro_usuario(request):
             user = authenticate(request, email=email, password=password)
             if user is not None:
                 login(request, user)
+                messages.success(request, 'Usuário cadastrado com sucesso.')
                 return redirect('usuario_login')
     else:
         form = UsuarioForm()

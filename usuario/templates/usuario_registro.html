@@ -89,7 +89,7 @@
 <body>
     <div class="registro-container">
         <h1>Registro de Usuário</h1>
-        <form id="registroForm" method="post" action="{% url 'usuario_registro' %}" onsubmit="return validarSenha() && redirecionarParaLogin()">
+        <form id="registroForm" method="post" action="{% url 'usuario_registro' %}">
             {% csrf_token %}
             <div>
                 <label for="nome">Nome:</label>
@@ -118,6 +118,8 @@
             <div>
                 <label for="cep">CEP:</label>
                 <input type="text" id="cep" name="cep" required>
+            </div>
+            <div>
                 <button type="button" onclick="preencherEndereco()">Preencher Endereço</button>
             </div>
             <div>
@@ -145,12 +147,39 @@
                 <input type="text" id="estado" name="estado" readonly>
             </div>
             <div>
-                <input type="submit" value="Registrar">
+                <button type="button" onclick="validarERegistrar()">Registrar</button>
+                <button type="button" onclick="location.href='{% url 'usuario_login' %}'">Voltar ao Login</button>
             </div>
         </form>
     </div>
 
     <script>
+        function validarERegistrar() {
+            var form = document.getElementById('registroForm');
+            var nome = document.getElementById('nome').value;
+            var email = document.getElementById('email').value;
+            var senha = document.getElementById('senha').value;
+            var confirmarSenha = document.getElementById('confirmarSenha').value;
+            var idade = document.getElementById('idade').value;
+            var cpf = document.getElementById('cpf').value;
+            var cep = document.getElementById('cep').value;
+            var numero = document.getElementById('numero').value;
+            
+            if (!nome || !email || !senha || !confirmarSenha || !idade || !cpf || !cep || !numero) {
+                alert('Por favor, preencha todos os campos.');
+                return;
+            }
+
+            if (senha !== confirmarSenha) {
+                alert('As senhas não coincidem!');
+                return;
+            }
+
+            // Se todas as verificações passaram, envie o formulário
+            form.submit();
+            alert('Usuário cadastrado com sucesso!');
+        }
+        
         function preencherEndereco() {
             var cep = document.getElementById('cep').value;
             var cepUrl = 'http://viacep.com.br/ws/' + cep + '/json/';
@@ -162,6 +191,10 @@
                     document.getElementById('bairro').value = data.bairro || '';
                     document.getElementById('cidade').value = data.localidade || '';
                     document.getElementById('estado').value = data.uf || '';
+
+                    if (!data.bairro) {
+                        alert('Bairro não encontrado para este CEP.');
+                    }
                 })
                 .catch(error => console.error('Erro ao buscar o endereço:', error));
         }
@@ -178,11 +211,25 @@
             return true;
         }
 
-        function redirecionarParaLogin() {
-            setTimeout(function() {
-                window.location.href = "{% url 'usuario_login' %}";
-            }, 1000);
-            return true;
+        function registrarUsuario() {
+            if (validarSenha()) {
+                var form = document.getElementById('registroForm');
+                var formData = new FormData(form);
+
+                fetch(form.action, {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message); // Exibe a mensagem de retorno do servidor
+                    if (data.success) {
+                        // Limpa os campos do formulário
+                        form.reset();
+                    }
+                })
+                .catch(error => console.error('Erro ao registrar usuário:', error));
+            }
         }
     </script>
 </body>
