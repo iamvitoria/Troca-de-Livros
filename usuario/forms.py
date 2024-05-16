@@ -4,10 +4,12 @@ import requests
 
 class UsuarioForm(forms.ModelForm):
     cep = forms.CharField(label='CEP', max_length=9)
+    senha = forms.CharField(label='Senha', widget=forms.PasswordInput)
+    confirmar_senha = forms.CharField(label='Confirmar Senha', widget=forms.PasswordInput)
 
     class Meta:
         model = Usuario
-        fields = ('email', 'nome', 'idade', 'cpf', 'cep', 'endereco', 'numero', 'complemento', 'bairro', 'cidade', 'estado')
+        fields = ('email', 'nome', 'idade', 'cpf', 'cep', 'endereco', 'numero', 'complemento', 'bairro', 'cidade', 'estado', 'senha', 'confirmar_senha')
 
     def clean_cep(self):
         cep = self.cleaned_data['cep']
@@ -27,6 +29,12 @@ class UsuarioForm(forms.ModelForm):
 
     def clean(self):
         cleaned_data = super().clean()
+        senha = cleaned_data.get("senha")
+        confirmar_senha = cleaned_data.get("confirmar_senha")
+
+        if senha != confirmar_senha:
+            self.add_error('confirmar_senha', forms.ValidationError("As senhas não coincidem"))
+
         email = cleaned_data.get("email")
         cpf = cleaned_data.get("cpf")
 
@@ -37,3 +45,11 @@ class UsuarioForm(forms.ModelForm):
             self.add_error('cpf', forms.ValidationError("Este CPF já está em uso"))
 
         return cleaned_data
+
+    def save(self, commit=True):
+        usuario = super().save(commit=False)
+        usuario.set_password(self.cleaned_data["senha"])
+
+        if commit:
+            usuario.save()
+        return usuario

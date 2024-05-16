@@ -1,13 +1,14 @@
 from django.shortcuts import render, redirect
+from .backends import UsuarioBackend
 from .forms import UsuarioForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import login
 
 def login_usuario(request):
     error_message = None
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
-        user = authenticate(request, email=email, password=password)
+        user = UsuarioBackend().authenticate(request, email=email, password=password)
         if user is not None:
             login(request, user)
             return redirect('index')
@@ -22,7 +23,7 @@ def registro_usuario(request):
             user = form.save()
             email = form.cleaned_data.get('email')
             password = form.cleaned_data.get('senha')
-            user = authenticate(request, email=email, password=password)
+            user = UsuarioBackend().authenticate(request, email=email, password=password)
             if user is not None:
                 login(request, user)
                 return redirect('usuario_login')
