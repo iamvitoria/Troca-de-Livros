@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livro Fora da Estante</title>
+    <style>
+        /* Estilos para a barra lateral */
+        .sidebar {
+            height: 100%;
+            width: 220px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: width 0.3s ease; /* Adiciona transição suave para mudanças de largura */
+            padding-top: 60px;
+        }
+
+        /* Estilos para a lista de itens da barra lateral */
+        .sidebar ul {
+            padding: 0;
+            margin: 0;
+            list-style-type: none;
+            text-align: center; /* Centraliza os itens na barra lateral */
+        }
+
+        /* Estilos para os itens da barra lateral */
+        .sidebar li {
+            margin-bottom: 15px; /* Espaçamento entre os itens */
+        }
+
+        /* Estilos específicos para o último item da lista (Logout) */
+        .sidebar li:last-child {
+            margin-top: auto; /* Move o último item para o final da barra lateral */
+        }
+
+        /* Estilos para os links da barra lateral */
+        .sidebar a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #818181;
+            display: block;
+        }
+
+        /* Estilo para os links da barra lateral quando passa o mouse */
+        .sidebar a:hover {
+            color: #f1f1f1;
+        }
+
+        /* Estilo para o conteúdo */
+        .content {
+            margin-left: 220px; /* Deixar espaço para a barra lateral */
+            padding: 16px;
+            transition: margin-left 0.3s ease; /* Adiciona transição suave para mudanças de margem */
+        }
+
+        /* Estilo para o botão do menu */
+        .menu-btn {
+            display: none; /* Oculta o botão do menu em telas maiores */
+        }
+
+        /* Estilo para a barra lateral quando o mouse não está sobre ela */
+        .sidebar:not(:hover) {
+            width: 200px; /* Reduz ligeiramente a largura */
+        }
+
+        /* Mostra o botão do menu apenas em telas menores */
+        @media screen and (max-width: 768px) {
+            .sidebar {
+                width: 220px; /* Mantém a largura padrão */
+            }
+
+            .content {
+                margin-left: 0; /* Não há espaço para a barra lateral */
+            }
+
+            .menu-btn {
+                display: block; /* Mostra o botão do menu */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Botão do menu -->
+<div class="menu-btn" onclick="toggleSidebar()">☰</div>
+
+<!-- Barra lateral -->
+{% include 'sidebar.html' %}
+
+<!-- Conteúdo -->
+<div class="content" id="content">
+    {% block content %}{% endblock %}
+</div>
+
+</body>
+</html>

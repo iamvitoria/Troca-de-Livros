@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>Livros à Venda</h1>
+    <ul>
+        {% for livro in livros %}
+            <li>{{ livro.titulo }} por {{ livro.autor }} - R$ {{ livro.preco }}</li>
+        {% endfor %}
+    </ul>
+ {% endblock %}

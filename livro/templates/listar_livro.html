@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Lista de Livros</h2>
+  <a href="{% url 'adicionar_livro' %}">Adicionar livro</a>
+  <ul>
+    {% for livro in livros %}
+      <li>
+        <h3>{{ livro.titulo }}</h3>
+        <p>Autor: {{ livro.autor }}</p>
+        <p>Descrição: {{ livro.descricao }}</p>
+        <p>Preço: {{ livro.preco }}</p>
+        <p>Data de Publicação: {{ livro.data_publicacao }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
