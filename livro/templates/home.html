@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <h1>Livros à Venda</h1>
+    <h2>Livros em destaque</h2>
     <ul>
         {% for livro in livros %}
             <li>{{ livro.titulo }} por {{ livro.autor }} - R$ {{ livro.preco }}</li>

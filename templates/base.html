@@ -1,96 +1,180 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Livro Fora da Estante</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Estilos para a barra lateral */
-        .sidebar {
-            height: 100%;
-            width: 220px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            background-color: #111;
-            overflow-x: hidden;
-            transition: width 0.3s ease; /* Adiciona transição suave para mudanças de largura */
-            padding-top: 60px;
-        }
-
-        /* Estilos para a lista de itens da barra lateral */
-        .sidebar ul {
-            padding: 0;
+        body {
+            font-family: 'Roboto', sans-serif;
             margin: 0;
-            list-style-type: none;
-            text-align: center; /* Centraliza os itens na barra lateral */
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
-
-        /* Estilos para os itens da barra lateral */
-        .sidebar li {
-            margin-bottom: 15px; /* Espaçamento entre os itens */
+        header {
+            background-color: #2c3e50;
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+            position: relative;
         }
-
-        /* Estilos específicos para o último item da lista (Logout) */
-        .sidebar li:last-child {
-            margin-top: auto; /* Move o último item para o final da barra lateral */
+        header form {
+            margin-top: 10px;
         }
-
-        /* Estilos para os links da barra lateral */
-        .sidebar a {
-            padding: 10px 15px;
-            text-decoration: none;
-            font-size: 18px;
-            color: #818181;
+        header input[type="text"] {
+            padding: 10px;
+            width: 300px;
+        }
+        header button {
+            padding: 10px 20px;
+            background-color: #34495e;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+        }
+        .menu-toggle {
             display: block;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            color: #ffffff;
+            font-size: 18px;
+        }
+        .menu {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            background-color: #34495e;
+            position: absolute;
+            top: 60px;
+            left: 20px;
+            border-radius: 5px;
+            padding: 10px;
+        }
+        .menu a {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            width: 100%;
+            text-align: center;
+        }
+        .menu a:hover {
+            background-color: #2c3e50;
+        }
+        main {
+            flex: 1;
+            padding: 20px;
+        }
+        section {
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #2c3e50;
+        }
+        .categories {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .category {
+            text-align: center;
+            margin: 10px;
+            color: #2c3e50;
+            font-size: 20px;
+        }
+        .category i {
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+        footer {
+            background-color: #34495e;
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        footer div {
+            margin-top: 20px;
         }
 
-        /* Estilo para os links da barra lateral quando passa o mouse */
-        .sidebar a:hover {
-            color: #f1f1f1;
-        }
-
-        /* Estilo para o conteúdo */
-        .content {
-            margin-left: 220px; /* Deixar espaço para a barra lateral */
-            padding: 16px;
-            transition: margin-left 0.3s ease; /* Adiciona transição suave para mudanças de margem */
-        }
-
-        /* Estilo para o botão do menu */
-        .menu-btn {
-            display: none; /* Oculta o botão do menu em telas maiores */
-        }
-
-        /* Estilo para a barra lateral quando o mouse não está sobre ela */
-        .sidebar:not(:hover) {
-            width: 200px; /* Reduz ligeiramente a largura */
-        }
-
-        /* Mostra o botão do menu apenas em telas menores */
+        /* Estilos para dispositivos menores */
         @media screen and (max-width: 768px) {
-            .sidebar {
-                width: 220px; /* Mantém a largura padrão */
+            header form {
+                display: none;
             }
-
-            .content {
-                margin-left: 0; /* Não há espaço para a barra lateral */
-            }
-
-            .menu-btn {
-                display: block; /* Mostra o botão do menu */
+            .menu-toggle {
+                display: block;
             }
         }
     </style>
 </head>
 <body>
-
-<!-- Botão do menu -->
-<div class="menu-btn" onclick="toggleSidebar()">☰</div>
-
-<!-- Barra lateral -->
-{% include 'sidebar.html' %}
+    <header>
+        <div>
+            <button class="menu-toggle" onclick="toggleMenu()">Menu</button>
+            <h1>Livro Fora da Estante</h1>
+            <form>
+                <input type="text" placeholder="Pesquisar livros...">
+                <button type="submit">Buscar</button>
+            </form>
+            <div id="menu" class="menu">
+                <a href="#">Início</a>
+                <a href="#">Perfil</a>
+                <a href="#">Conversas</a>
+                <a href="#">Sair</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section>
+            <h2>Categorias em Destaque</h2>
+            <div class="categories">
+                <div class="category">
+                    <i class="fas fa-book"></i>
+                    <p>Ficção</p>
+                </div>
+                <div class="category">
+                    <i class="fas fa-lightbulb"></i>
+                    <p>Não Ficção</p>
+                </div>
+                <div class="category">
+                    <i class="fas fa-heart"></i>
+                    <p>Romance</p>
+                </div>
+                <div class="category">
+                    <i class="fas fa-search"></i>
+                    <p>Mistério</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div>
+            <p>&copy; 2024 Livro Fora da Estante. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('menu');
+            menu.classList.toggle('open');
+            if (menu.style.display === "flex") {
+                menu.style.display = "none";
+            } else {
+                menu.style.display = "flex";
+            }
+        }
+    </script>
 
 <!-- Conteúdo -->
 <div class="content" id="content">
