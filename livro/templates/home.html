@@ -2,10 +2,28 @@
 
 {% block content %}
 
-    <h1>Livros à Venda</h1>
-    <ul>
-        {% for livro in livros %}
-            <li>{{ livro.titulo }} por {{ livro.autor }} - R$ {{ livro.preco }}</li>
-        {% endfor %}
-    </ul>
+    <main>
+        <section>
+            <h2>Categorias em Destaque</h2>
+            <div class="categories">
+                <div class="category">
+                    <i class="fas fa-book"></i>
+                    <p>Ficção</p>
+                </div>
+                <div class="category">
+                    <i class="fas fa-lightbulb"></i>
+                    <p>Não Ficção</p>
+                </div>
+                <div class="category">
+                    <i class="fas fa-heart"></i>
+                    <p>Romance</p>
+                </div>
+                <div class="category">
+                    <i class="fas fa-search"></i>
+                    <p>Mistério</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
  {% endblock %}

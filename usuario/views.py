@@ -3,6 +3,11 @@ from .backends import UsuarioBackend
 from .forms import UsuarioForm
 from django.contrib.auth import login
 
+from django.views.generic import TemplateView, ListView
+
+class ProfileView(TemplateView):
+    template_name = 'perfil.html'
+
 def login_usuario(request):
     error_message = None
     if request.method == 'POST':

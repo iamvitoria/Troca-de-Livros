@@ -1,17 +1,42 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>Lista de Livros</h2>
-  <a href="{% url 'adicionar_livro' %}">Adicionar livro</a>
-  <ul>
-    {% for livro in livros %}
-      <li>
-        <h3>{{ livro.titulo }}</h3>
-        <p>Autor: {{ livro.autor }}</p>
-        <p>Descrição: {{ livro.descricao }}</p>
-        <p>Preço: {{ livro.preco }}</p>
-        <p>Data de Publicação: {{ livro.data_publicacao }}</p>
-      </li>
-    {% endfor %}
-  </ul>
+<main>
+    <section>
+        <h2>Lista de Livros</h2>
+        <a href="{% url 'adicionar_livro' %}">Adicionar livro</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Autor</th>
+                    <th>Descrição</th>
+                    <th>Preço</th>
+                    <th>Data de Publicação</th>
+                    <th>Gênero</th>
+                    <th>Capa do Livro</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for livro in livros %}
+                <tr>
+                    <td>{{ livro.titulo }}</td>
+                    <td>{{ livro.autor }}</td>
+                    <td>{{ livro.descricao }}</td>
+                    <td>{{ livro.preco }}</td>
+                    <td>{{ livro.data_publicacao }}</td>
+                    <td>{{ livro.get_genero_display }}</td>
+                    <td>
+                        {% if livro.imagem %}
+                        <img src="{{ livro.imagem.url }}" alt="Capa de {{ livro.titulo }}" style="max-width: 100px; max-height: 150px;">
+                        {% else %}
+                        <p>Sem imagem</p>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+</main>
 {% endblock %}
