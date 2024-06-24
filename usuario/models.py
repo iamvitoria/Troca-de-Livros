@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.core.validators import EmailValidator
 import requests
 
@@ -13,7 +13,16 @@ class UsuarioManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-class Usuario(AbstractBaseUser):
+    def create_superuser(self, email, nome, idade, cpf, senha, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+
+        return self.create_user(email, nome, idade, cpf, senha, **extra_fields)
+
+class Usuario(AbstractBaseUser, PermissionsMixin):
+    is_staff = models.BooleanField('Membro da equipe', default=False,
+        help_text='Designa se este usuário pode acessar a área de administração.')
+
     nome = models.CharField('Nome', max_length=250, help_text="Nome do usuário")
     idade = models.PositiveIntegerField('Idade')
     email = models.EmailField('E-mail', unique=True, validators=[EmailValidator()])
@@ -35,7 +44,7 @@ class Usuario(AbstractBaseUser):
         return self.nome
 
     def save(self, *args, **kwargs):
-        if self.cep:
+        if self.cep and not self.endereco:
             self._preencher_endereco()
         super().save(*args, **kwargs)
 
@@ -48,3 +57,17 @@ class Usuario(AbstractBaseUser):
             self.bairro = data.get('bairro', '')
             self.cidade = data.get('localidade', '')
             self.estado = data.get('uf', '')
+
+    # Adicione os related_names para resolver os conflitos
+    groups = models.ManyToManyField(
+        'auth.Group',
+        verbose_name='groups',
+        blank=True,
+        related_name='auth_user_groups'  # related_name para o auth.User.groups
+    )
+    user_permissions = models.ManyToManyField(
+        'auth.Permission',
+        verbose_name='user permissions',
+        blank=True,
+        related_name='auth_user_permissions'  # related_name para o auth.User.user_permissions
+    )

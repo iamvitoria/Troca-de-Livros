@@ -17,6 +17,7 @@ class Livro(models.Model):
     ano_publicacao = models.IntegerField(default=2024)
     genero = models.CharField(max_length=20, choices=GENEROS_CHOICES, default='fiction')
     imagem = models.ImageField(upload_to='livros/', blank=True, null=True)
+    usuario = models.CharField(max_length=200, default='null')
 
     def __str__(self):
         return self.titulo
