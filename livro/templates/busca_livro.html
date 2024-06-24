@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
     <main>
         <section>
-            <div class="books">
+
+            <div class="books" style="margin-top: 5%">
                 {% for livro in livros %}
-                {% if livro.usuario == user.email %}
                 <div class="card">
                     <img class="card-img-top" src="{{ livro.imagem.url }}" alt="Livro 1">
                     <div class="card-body">
@@ -14,9 +15,11 @@
                         <a href="{% url 'detalhes_livro' livro.pk %}" class="btn btn-primary">{{livro.preco}}</a>
                     </div>
                 </div>
-                {% endif %}
                 {% endfor %}
             </div>
         </section>
+
+
     </main>
-{% endblock %}
+
+ {% endblock %}

@@ -6,6 +6,22 @@ from django.contrib.auth import login
 from django.views.generic import TemplateView, ListView
 from django.contrib.auth.decorators import login_required
 
+from django.shortcuts import render
+from .models import Usuario
+
+from django.shortcuts import get_object_or_404, redirect
+from .models import Usuario
+
+def excluir_usuario(request, usuario_id):
+    usuario = get_object_or_404(Usuario, id=usuario_id)
+    if request.method == 'POST':
+        usuario.delete()
+        return redirect('lista_usuarios')
+
+def lista_usuarios(request):
+    usuarios = Usuario.objects.all()
+    return render(request, 'lista_usuarios.html', {'usuarios': usuarios})
+
 
 class ProfileView(TemplateView):
     template_name = "perfil.html"

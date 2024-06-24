@@ -5,11 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="59732024-576f-40b4-b3b5-673f633a45d4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/livro/templates/busca_livro.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/livro/templates/detalhes_livro.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/usuario/templates/lista_usuarios.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/livro/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/livro/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/livro/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/livro/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/livro/templates/adicionar_livro.html" beforeDir="false" afterPath="$PROJECT_DIR$/livro/templates/adicionar_livro.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usuario/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/usuario/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/livro/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/livro/templates/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/livro/templates/listar_livro.html" beforeDir="false" afterPath="$PROJECT_DIR$/livro/templates/listar_livro.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/livro/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/livro/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/livro/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/livro/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usuario/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/usuario/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usuario/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/usuario/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -7,314 +7,451 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-</head>
-<style>
-    body {
-        font-family: 'Roboto', sans-serif;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-    }
 
-    header {
-        background-color: #2c3e50;
-        color: #ffffff;
-        padding: 20px;
-        text-align: center;
-        position: relative;
-    }
-
-    header form {
-        margin-top: 10px;
-        display: flex;
-        justify-content: center;
-    }
-
-    header input[type="text"] {
-        padding: 10px;
-        width: 300px;
-        border: 1px solid #34495e;
-        border-radius: 5px;
-    }
-
-    header button {
-        padding: 10px 20px;
-        background-color: #34495e;
-        color: #ffffff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-left: 10px;
-    }
-
-    header button:hover {
-        background-color: #2c3e50;
-    }
-
-    .menu-toggle {
-        display: block;
-        position: absolute;
-        top: 20px;
-        left: 20px;
-        background-color: transparent;
-        border: none;
-        cursor: pointer;
-        color: #ffffff;
-        font-size: 18px;
-    }
-
-    .menu {
-        display: none;
-        flex-direction: column;
-        align-items: center;
-        background-color: #34495e;
-        position: absolute;
-        top: 60px;
-        left: 20px;
-        border-radius: 5px;
-        padding: 10px;
-    }
-
-    .menu.open {
-        display: flex;
-    }
-
-    .menu a {
-        color: #ffffff;
-        text-decoration: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        width: 100%;
-        text-align: center;
-    }
-
-    .menu a:hover {
-        background-color: #2c3e50;
-    }
-
-    main {
-        flex: 1;
-        padding: 20px;
-    }
-
-    .profile-section {
-        max-width: 800px;
-        margin: 0 auto;
-        background-color: #f5f5f5;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    .profile-header {
-        display: flex;
-        align-items: center;
-        gap: 20px;
-        margin-bottom: 20px;
-    }
-
-    .profile-header img {
-        border-radius: 50%;
-        width: 100px;
-        height: 100px;
-    }
-
-    .profile-info {
-        flex: 1;
-    }
-
-    .profile-details {
-        margin-bottom: 20px;
-    }
-
-    .profile-details h3 {
-        color: #2c3e50;
-        font-size: 20px;
-        margin-bottom: 10px;
-    }
-
-    .profile-details ul {
-        list-style-type: none;
-        padding: 0;
-    }
-
-    .profile-details ul li {
-        margin-bottom: 10px;
-    }
-
-    .profile-actions {
-        display: flex;
-        gap: 10px;
-    }
-
-    .profile-actions button {
-        padding: 10px 20px;
-        background-color: #2c3e50;
-        color: #ffffff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    .profile-actions button:hover {
-        background-color: #e67e22;
-    }
-
-    #form-cadastro-livros {
-        max-width: 600px;
-        margin: 0 auto;
-        background: #f5f5f5; /* Cor mais clara para o formulário */
-        padding: 20px;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    #form-cadastro-livros div {
-        margin-bottom: 15px;
-    }
-
-    #form-cadastro-livros label {
-        display: block;
-        margin-bottom: 5px;
-        color: #2c3e50;
-    }
-
-    #form-cadastro-livros input[type="text"],
-    #form-cadastro-livros select,
-    #form-cadastro-livros textarea,
-    #form-cadastro-livros input[type="file"] {
-        width: calc(100% - 20px);
-        padding: 10px;
-        border: 1px solid #2c3e50;
-        border-radius: 5px;
-        box-sizing: border-box;
-        background-color: #ffffff;
-        color: #2c3e50;
-    }
-
-    #form-cadastro-livros button {
-        padding: 10px 20px;
-        background-color: #2c3e50;
-        color: #ffffff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    #form-cadastro-livros button:hover {
-        background-color: #e67e22;
-    }
-
-    .conversations-section {
-        max-width: 800px;
-        margin: 0 auto;
-    }
-
-    .conversations {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .conversation {
-        display: flex;
-        align-items: center;
-        background-color: #f5f5f5;
-        padding: 15px;
-        border-radius: 10px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        transition: transform 0.2s;
-    }
-
-    .conversation:hover {
-        transform: scale(1.02);
-    }
-
-    .conversation img {
-        border-radius: 50%;
-        margin-right: 15px;
-    }
-
-    .conversation-details {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .conversation-details h3 {
-        margin: 0;
-        font-size: 18px;
-        color: #2c3e50;
-    }
-
-    .conversation-details p {
-        margin: 5px 0 0;
-        font-size: 14px;
-        color: #7f8c8d;
-    }
-
-    footer {
-        background-color: #34495e;
-        color: #ffffff;
-        padding: 20px;
-        text-align: center;
-        width: 100%;
-        margin-top: auto;
-        position: relative;
-    }
-
-    footer div {
-        margin-top: 20px;
-    }
-
-    @media screen and (max-width: 768px) {
-        header form {
-            display: none;
-        }
-        .menu-toggle {
-            display: block;
-        }
-        .profile-header {
-            flex-direction: column;
-            align-items: center;
-        }
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
         .books {
-            flex-direction: column;
-            align-items: center;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
         }
         .book {
-            width: 100%;
+            flex: 1 0 21%;
+            margin: 10px;
+            text-align: center;
         }
+        .book img {
+            max-width: 80%; /* Reduzindo a largura máxima da imagem */
+            height: auto;
+        }
+
+        body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #2c3e50;
+    color: #ffffff;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+}
+
+header form {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+header input[type="text"] {
+    padding: 10px;
+    width: 300px;
+    border: 1px solid #34495e;
+    border-radius: 5px;
+}
+
+header button {
+    padding: 10px 20px;
+    background-color: #34495e;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+header button:hover {
+    background-color: #2c3e50;
+}
+
+.menu-toggle {
+    display: block;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #ffffff;
+    font-size: 18px;
+}
+
+.menu {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    background-color: #34495e;
+    position: absolute;
+    top: 60px;
+    left: 20px;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.menu.open {
+    display: flex;
+}
+
+.menu a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    width: 100%;
+    text-align: center;
+}
+
+.menu a:hover {
+    background-color: #2c3e50;
+}
+
+main {
+    flex: 1;
+    padding: 20px;
+}
+
+.profile-section {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.profile-header img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+}
+
+.profile-info {
+    flex: 1;
+}
+
+.profile-details {
+    margin-bottom: 20px;
+}
+
+.profile-details h3 {
+    color: #2c3e50;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.profile-details ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.profile-details ul li {
+    margin-bottom: 10px;
+}
+
+.profile-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.profile-actions button {
+    padding: 10px 20px;
+    background-color: #2c3e50;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.profile-actions button:hover {
+    background-color: #e67e22;
+}
+
+#form-cadastro-livros {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #f5f5f5; /* Cor mais clara para o formulário */
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#form-cadastro-livros div {
+    margin-bottom: 15px;
+}
+
+#form-cadastro-livros label {
+    display: block;
+    margin-bottom: 5px;
+    color: #2c3e50;
+}
+
+#form-cadastro-livros input[type="text"],
+#form-cadastro-livros select,
+#form-cadastro-livros textarea,
+#form-cadastro-livros input[type="file"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid #2c3e50;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    color: #2c3e50;
+}
+
+#form-cadastro-livros button {
+    padding: 10px 20px;
+    background-color: #2c3e50;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#form-cadastro-livros button:hover {
+    background-color: #e67e22;
+}
+
+.conversations-section {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.conversations {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.conversation {
+    display: flex;
+    align-items: center;
+    background-color: #f5f5f5;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.conversation:hover {
+    transform: scale(1.02);
+}
+
+.conversation img {
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.conversation-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.conversation-details h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #2c3e50;
+}
+
+.conversation-details p {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: #7f8c8d;
+}
+
+footer {
+    background-color: #34495e;
+    color: #ffffff;
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+    margin-top: auto;
+    position: relative;
+}
+
+footer div {
+    margin-top: 20px;
+}
+
+@media screen and (max-width: 768px) {
+    header form {
+        display: none;
+    }
+    .menu-toggle {
+        display: block;
+    }
+    .profile-header {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+
+.books {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.card {
+    width: calc(25% - 20px); /* Calcula o tamanho do card com margens */
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.03); /* Efeito de escala ao passar o mouse */
+}
+
+.card-img-top {
+    padding-top: 20px;
+    width: 50%;
+    height: auto;
+    margin: 0 auto; /* Centraliza a imagem horizontalmente */
+    display: block; /* Garante que o margin auto funcione corretamente */
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.card-text {
+    color: #555;
+    text-align: center;
+}
+
+.btn {
+    padding: 10px 20px;
+    background-color: #2c3e50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    display: block; /* Garante que o botão ocupe toda a largura disponível */
+    width: fit-content; /* Define a largura do botão para se ajustar ao conteúdo */
+    margin: 0 auto; /* Centraliza horizontalmente o botão */
+}
+
+.btn:hover {
+    background-color: #34495e;
+    text-decoration: none;
+    color: #fff;
+}
+.categories {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.category {
+    text-align: center;
+    margin: 10px;
+    color: #2c3e50;
+    font-size: 20px;
+    flex: 1 0 200px;
+}
+
+.category i {
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+
+.book-details {
+    display: flex;
+    align-items: center;
+    justify-content: space-around; /* Centraliza os itens horizontalmente */
+    flex-direction: row; /* Coloca os itens em uma linha */
+    max-width: 800px;
+    margin: 20px auto;
+    text-align: center; /* Alinha o texto à esquerda */
+    gap: 20px;
+}
+
+.book-details img {
+    max-width: 50%; /* Ajusta a largura máxima para ocupar o espaço disponível */
+    height: auto; /* Mantém a proporção da imagem */
+    display: block; /* Remove espaços extras abaixo da imagem */
+    margin: 0 auto; /* Centraliza horizontalmente */
+}
+
+.book-info {
+    flex: 1;
+}
+
+.book-info h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.book-info p {
+    margin: 10px 0;
+}
+
+.contact-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #34495e;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.contact-button:hover {
+    background-color: #2c3e50;
+}
+
+@media screen and (max-width: 768px) {
+    .book-details {
+        flex-direction: column;
+        align-items: center;
     }
 
-    .categories {
-        display: flex;
-        justify-content: space-around;
-        flex-wrap: wrap;
+    .book-details img {
+        max-width: 100%;
     }
 
-    .category {
+    .book-info h2 {
         text-align: center;
-        margin: 10px;
-        color: #2c3e50;
-        font-size: 20px;
-        flex: 1 0 200px;
     }
+}
+    </style>
 
-    .category i {
-        font-size: 50px;
-        margin-bottom: 10px;
-    }
+</head>
 
-</style>
 <body>
     <header>
         <div>
             <button class="menu-toggle" onclick="toggleMenu()">Menu</button>
             <h1>Livro Fora da Estante</h1>
-            <form>
-                <input type="text" placeholder="Pesquisar livros...">
+            <form action="{% url 'busca_livro' %}" method="GET">
+                <input type="text" name="q" placeholder="Pesquisar livros...">
                 <button type="submit">Buscar</button>
             </form>
             <div id="menu" class="menu">

@@ -4,7 +4,6 @@
 
     <main>
         <section>
-            <h2>Categorias em Destaque</h2>
             <div class="categories">
                 <div class="category">
                     <i class="fas fa-book"></i>
@@ -23,7 +22,22 @@
                     <p>Mistério</p>
                 </div>
             </div>
+
+            <div class="books" style="margin-top: 5%">
+                {% for livro in livros %}
+                <div class="card">
+                    <img class="card-img-top" src="{{ livro.imagem.url }}" alt="Livro 1">
+                    <div class="card-body">
+                        <h5 class="card-title">{{livro.titulo}}</h5>
+                        <p class="card-text">{{livro.autor}}</p>
+                        <a href="{% url 'detalhes_livro' livro.pk %}" class="btn btn-primary">{{livro.preco}}</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
         </section>
+
+
     </main>
 
  {% endblock %}
