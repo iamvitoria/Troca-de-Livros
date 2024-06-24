@@ -2,30 +2,29 @@
 
 {% block content %}
 
-    <main>
-        <section class="profile-section">
-            <div class="profile-header">
-                <img src="profile-pic.jpg" alt="Foto do perfil" width="100" height="100">
-                <div class="profile-info">
-                    <h2>Nome do Usuário</h2>
-                    <p>email@exemplo.com</p>
-                </div>
+<main>
+    <section class="profile-section">
+        <div class="profile-header">
+            <img src="profile-pic.jpg" alt="Foto do perfil" width="100" height="100">
+            <div class="profile-info">
+                <h2>{{ request.user }}</h2>
+                <p>{{ user.email }}</p>
             </div>
-            <div class="profile-details">
-                <h3>Informações do Perfil</h3>
-                <ul>
-                    <li><strong>Nome:</strong> Nome do Usuário</li>
-                    <li><strong>Email:</strong> email@exemplo.com</li>
-                    <li><strong>Localização:</strong> Cidade, Estado</li>
-                    <li><strong>Membro desde:</strong> Janeiro de 2023</li>
-                    <!-- Adicione mais informações conforme necessário -->
-                </ul>
-            </div>
-            <div class="profile-actions">
-                <button class="edit-profile-btn">Editar Perfil</button>
-                <button class="logout-btn">Sair</button>
-            </div>
-        </section>
-    </main>
+        </div>
+        <div class="profile-details">
+            <h3>Informações do Perfil</h3>
+            <ul>
+                <li><strong>Nome:</strong> {{ user.nome }}</li>
+                <li><strong>Email:</strong> {{ user.email }}</li>
+                <li><strong>Localização:</strong> {{ user.cidade }}, {{ user.estado }}</li>
+                <!-- Adicione mais informações conforme necessário -->
+            </ul>
+        </div>
+        <div class="profile-actions">
+            <button class="edit-profile-btn">Editar Perfil</button>
+            <a href="#" class="logout-btn">Sair</a>
+        </div>
+    </section>
+</main>
 
- {% endblock %}
+{% endblock %}
