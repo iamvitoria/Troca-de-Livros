@@ -5,7 +5,7 @@
 <main>
     <section class="profile-section">
         <div class="profile-header">
-            <img src="profile-pic.jpg" alt="Foto do perfil" width="100" height="100">
+            <img src="./media/profile-pic.jpg" alt="Foto do perfil" width="100" height="100">
             <div class="profile-info">
                 <h2>{{ request.user }}</h2>
                 <p>{{ user.email }}</p>
@@ -16,15 +16,20 @@
             <ul>
                 <li><strong>Nome:</strong> {{ user.nome }}</li>
                 <li><strong>Email:</strong> {{ user.email }}</li>
+                <li><strong>Idade:</strong> {{ user.idade }} anos</li>
                 <li><strong>Localização:</strong> {{ user.cidade }}, {{ user.estado }}</li>
-                <!-- Adicione mais informações conforme necessário -->
             </ul>
         </div>
         <div class="profile-actions">
-            <button class="edit-profile-btn">Editar Perfil</button>
-            <a href="#" class="logout-btn">Sair</a>
+            <button class="edit-profile-btn" id="editarPerfilBtn">Editar Perfil</button>
         </div>
     </section>
 </main>
+
+<script>
+    document.getElementById("editarPerfilBtn").addEventListener("click", function() {
+        window.location.href = "{% url 'editar_perfil' %}";
+    });
+</script>
 
 {% endblock %}

@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+
 from .backends import UsuarioBackend
-from .forms import UsuarioForm
+from .forms import UsuarioForm, EditarPerfilForm
 from django.contrib.auth import login
 
 from django.views.generic import TemplateView, ListView
@@ -12,15 +14,29 @@ from .models import Usuario
 from django.shortcuts import get_object_or_404, redirect
 from .models import Usuario
 
+
 def excluir_usuario(request, usuario_id):
     usuario = get_object_or_404(Usuario, id=usuario_id)
-    if request.method == 'POST':
+    if request.method == "POST":
         usuario.delete()
-        return redirect('lista_usuarios')
+        return redirect("lista_usuarios")
+
+
+def editar_perfil(request):
+    user = request.user
+    if request.method == "POST":
+        form = EditarPerfilForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect("perfil")
+    else:
+        form = EditarPerfilForm(instance=user)
+    return render(request, "editar_perfil.html", {"form": form})
+
 
 def lista_usuarios(request):
     usuarios = Usuario.objects.all()
-    return render(request, 'lista_usuarios.html', {'usuarios': usuarios})
+    return render(request, "lista_usuarios.html", {"usuarios": usuarios})
 
 
 class ProfileView(TemplateView):
