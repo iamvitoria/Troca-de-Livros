@@ -23,7 +23,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField('Membro da equipe', default=False,
         help_text='Designa se este usuário pode acessar a área de administração.')
 
-    nome = models.CharField('Nome', max_length=250, help_text="Nome do usuário")
+    nome = models.CharField('Nome', max_length=250)
     idade = models.PositiveIntegerField('Idade')
     email = models.EmailField('E-mail', unique=True, validators=[EmailValidator()])
     cpf = models.CharField('CPF', max_length=14, unique=True)
