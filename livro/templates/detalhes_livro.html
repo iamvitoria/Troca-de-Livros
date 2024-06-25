@@ -5,10 +5,10 @@
     <section class="book-details">
         <img id="book-image" src="{{ livro.imagem.url }}" alt="Imagem do Livro">
         <div class="book-info">
-            <h2 id="book-title">{{ livro.titulo }}</h2>
+            <h2 id="book-title">{{ livro.titulo }} </h2>
             <p id="book-author">Autor: {{ livro.autor }}</p>
             <p id="book-description">{{ livro.descricao }}</p>
-            <button class="contact-button">Entrar em contato</button>
+            <a href="{% url 'chat' livro.usuario %}"><button class="contact-button">Entrar em contato</button></a>
         </div>
     </section>
 </main>

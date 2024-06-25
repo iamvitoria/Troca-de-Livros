@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main>
+    <section class="conversations-section">
+        <h2>Conversas</h2>
+        <div class="conversations">
+            {% for conversa in conversas %}
+            <a href="{% url 'chat' conversa.destinatario%}"><div class="conversation">
+                <img src="https://via.placeholder.com/50" alt="Avatar">
+                <div class="conversation-details">
+                    <h3>{{ conversa.destinatario }}</h3>
+                    <p>{{ conversa.ultima_mensagem }}</p>
+                </div>
+            </div>
+            </a>
+            {% endfor %}
+        </div>
+    </section>
+</main>
+
+{% endblock %}

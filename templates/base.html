@@ -442,7 +442,6 @@ footer div {
     }
 }
     </style>
-
 </head>
 
 <body>
@@ -459,7 +458,7 @@ footer div {
                 <a href="{% url 'perfil' %}">Perfil</a>
                 <a href="{% url 'listar_livro' %}">Meus Itens</a>
                 <a href="{% url 'adicionar_livro' %}">Cadastro de livros</a>
-                <a href="conversas.html">Conversas</a>
+                <a href="{% url 'conversas' %}">Conversas</a>
                 <a href="{% url 'usuario_login' %}">Sair</a>
             </div>
         </div>
