@@ -1,6 +1,8 @@
 from django.urls import path
 from .views import ProfileView
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path("perfil/", ProfileView.as_view(), name="perfil"),
@@ -11,4 +13,4 @@ urlpatterns = [
         views.excluir_usuario,
         name="excluir_usuario",
     ),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

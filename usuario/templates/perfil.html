@@ -1,11 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% load static %}
 
 <main>
     <section class="profile-section">
         <div class="profile-header">
-            <img src="./media/profile-pic.jpg" alt="Foto do perfil" width="100" height="100">
+            {% if user.foto_perfil %}
+                <img src="{{ user.foto_perfil.url }}" alt="Foto do perfil" width="100" height="100">
+            {% else %}
+                <img src="{% static 'caminho/para/imagem/padrao.png' %}" alt="Foto do perfil" width="100" height="100">
+            {% endif %}
             <div class="profile-info">
                 <h2>{{ request.user }}</h2>
                 <p>{{ user.email }}</p>

@@ -77,6 +77,20 @@ class UsuarioForm(forms.ModelForm):
 class EditarPerfilForm(forms.ModelForm):
     class Meta:
         model = Usuario
-        fields = ["nome", "email", "idade", "cidade", "estado", "foto_perfil"]
+        fields = [
+            "nome",
+            "email",
+            "idade",
+            "cep",
+            "endereco",
+            "numero",
+            "complemento",
+            "bairro",
+            "cidade",
+            "estado",
+            "foto_perfil",
+        ]
 
-    foto_perfil = forms.ImageField(required=False)
+    foto_perfil = forms.ImageField(
+        required=False, label="Foto de Perfil", widget=forms.FileInput
+    )

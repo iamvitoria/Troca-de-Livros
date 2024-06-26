@@ -99,20 +99,24 @@
     </div>
 
     <script>
-        function preencherEndereco() {
-            var cep = document.getElementById('cep').value;
-            var cepUrl = 'http://viacep.com.br/ws/' + cep + '/json/';
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("id_cep").addEventListener("change", function() {
+                var cep = this.value;
+                var cepUrl = 'http://viacep.com.br/ws/' + cep + '/json/';
 
-            fetch(cepUrl)
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('logradouro').value = data.logradouro || '';
-                    document.getElementById('bairro').value = data.bairro || '';
-                    document.getElementById('cidade').value = data.localidade || '';
-                    document.getElementById('estado').value = data.uf || '';
-                })
-                .catch(error => console.error('Erro ao buscar o endereço:', error));
-        }
+                fetch(cepUrl)
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById("id_endereco").value = data.logradouro || '';
+                        document.getElementById("id_numero").value = data.numero || '';
+                        document.getElementById("id_complemento").value = '';
+                        document.getElementById("id_bairro").value = data.bairro || '';
+                        document.getElementById("id_cidade").value = data.localidade || '';
+                        document.getElementById("id_estado").value = data.uf || '';
+                    })
+                    .catch(error => console.error('Erro ao buscar o endereço:', error));
+            });
+        });
 
         function validarSenha() {
             var senha = document.getElementById('senha').value;
