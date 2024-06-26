@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Mensagens</title>
+</head>
+<body>
+    <h1>Lista de Mensagens</h1>
+    <ul>
+        {% for mensagem in mensagens %}
+            <li>
+                <p>{{ mensagem.descricao }}</p>
+                <form action="{% url 'mensagem-delete' mensagem.pk %}" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="Excluir">
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

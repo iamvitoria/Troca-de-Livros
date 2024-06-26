@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Confirmação de Exclusão</title>
+</head>
+<body>
+    <h1>Confirmação de Exclusão</h1>
+    <p>Tem certeza de que deseja excluir esta mensagem?</p>
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="Confirmar">
+    </form>
+    <a href="{% url 'mensagem-list' %}">Cancelar</a>
+</body>
+</html>

@@ -6,31 +6,55 @@ from django.views.generic import ListView
 from django.db.models import Q
 from .models import Mensagem
 
+from django.views.generic import ListView, DeleteView
+from django.urls import reverse_lazy
+from .models import Mensagem
+
+class MensagemListView(ListView):
+    model = Mensagem
+    template_name = 'mensagem_list.html'
+    context_object_name = 'mensagens'
+
+class MensagemDeleteView(DeleteView):
+    model = Mensagem
+    success_url = reverse_lazy('mensagem-list')
+    template_name = 'mensagem_confirm_delete.html'
+
+from django.db.models import Q
+from django.views.generic import ListView
+from .models import Mensagem
+
 class ConversasView(ListView):
     model = Mensagem
     template_name = 'conversas.html'
     context_object_name = 'conversas'
 
     def get_queryset(self):
-        remetente_email = self.request.user.email  # Obtém o email do usuário autenticado
+        email_usuario = self.request.user.email  # Obtém o email do usuário autenticado
 
-        # Busca todos os destinatários únicos com quem o usuário autenticado trocou mensagens
-        destinatarios = Mensagem.objects.filter(remetente_email=remetente_email).values_list('destinatario_email', flat=True).distinct()
+        # Busca todos os emails que aparecem nos campos remetente_email ou destinatario_email
+        emails = Mensagem.objects.filter(
+            Q(remetente_email=email_usuario) | Q(destinatario_email=email_usuario)
+        ).values_list('remetente_email', 'destinatario_email').distinct()
 
-        # Lista para armazenar informações resumidas de cada conversa
+        # Extrai os emails e remove o próprio email do usuário
+        contatos = set()
+        for remetente, destinatario in emails:
+            if remetente != email_usuario:
+                contatos.add(remetente)
+            if destinatario != email_usuario:
+                contatos.add(destinatario)
+
         conversas = []
-
-        # Para cada destinatário, busca a última mensagem trocada
-        for destinatario in destinatarios:
+        for contato in contatos:
             ultima_mensagem = Mensagem.objects.filter(
-                Q(remetente_email=remetente_email, destinatario_email=destinatario) |
-                Q(remetente_email=destinatario, destinatario_email=remetente_email)
+                Q(remetente_email=email_usuario, destinatario_email=contato) |
+                Q(remetente_email=contato, destinatario_email=email_usuario)
             ).order_by('-data_envio').first()
 
             if ultima_mensagem:
-                # Cria um dicionário com informações resumidas da conversa
                 conversa = {
-                    'destinatario': destinatario,
+                    'destinatario': contato,
                     'ultima_mensagem': ultima_mensagem.descricao,
                     'data_envio': ultima_mensagem.data_envio
                 }
@@ -39,6 +63,7 @@ class ConversasView(ListView):
         conversas.sort(key=lambda x: x['data_envio'], reverse=True)
 
         return conversas
+
 
 class ChatView(TemplateView):
     template_name = 'chat.html'
