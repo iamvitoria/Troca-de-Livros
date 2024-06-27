@@ -2,62 +2,160 @@
 
 {% block content %}
 
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
 <style>
-    <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f0f0f0;
-        margin: 0;
-        padding: 20px;
-    }
-    .chat-container {
-        width: 80%;
-        max-width: 600px;
-        margin: 0 auto;
-        background-color: #fff;
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    .message {
-        padding: 10px 20px;
-        clear: both;
-        overflow: auto;
-    }
-    .message.sent {
-        text-align: right;
-        background-color: #8fb7c4;
-    }
-    .message.received {
-        text-align: left;
-        background-color: #E0E0E0;
-    }
+  .chat-container-django {
+    width: calc(100% / 2); /* Ocupa 1/3 da largura da tela */
+    max-width: 600px; /* Define uma largura máxima para o chat */
+    margin: 0 auto; /* Centraliza horizontalmente */
+    background-color: #ffffff; /* Fundo branco para o container do chat */
+    border: 1px solid #e5e5ea; /* Borda para o container do chat */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra leve */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  .chat-messages {
+    flex: 1; /* Faz com que o chat-messages ocupe todo o espaço disponível */
+    overflow-y: auto; /* Adiciona scroll quando o conteúdo do chat for maior que a altura */
+    padding-bottom: 20px; /* Espaçamento inferior para o scroll não cobrir as últimas mensagens */
+  }
+
+  .chat-message-django {
+    display: flex;
+    margin-bottom: 15px;
+  }
+
+  .user-photo-django {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .message-bubble-django {
+    background-color: #e5e5ea; /* Fundo padrão para mensagens da outra pessoa */
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 70%;
+    position: relative;
+  }
+
+  .chat-message-django.sent .message-bubble-django {
+    background-color: #aee2f5; /* Azul claro para mensagens do usuário */
+    margin-left: auto; /* Faz com que a mensagem do usuário fique à direita */
+  }
+
+  .chat-message-django.received {
+    align-items: flex-start; /* Alinha as mensagens recebidas à esquerda */
+  }
+
+  .chat-message-django.received .user-photo-django {
+    align-self: flex-end; /* Posiciona a foto do usuário recebido à direita */
+  }
+
+  .chat-message-django.received .message-bubble-django {
+    background-color: #e5e5ea; /* Fundo padrão para mensagens recebidas */
+  }
+
+  .chat-input-container {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+  }
+
+  .chat-input {
+    flex: 1;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 10px;
+    font-size: 14px;
+    outline: none;
+  }
+
+  .chat-send-button {
+    background-color: #aee2f5;
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+
+  .chat-send-button:hover {
+    background-color: #8cd5eb;
+  }
+
+  .chat-message-django {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.message-time {
+  font-size: 0.8em;
+  color: #999;
+  display: block;
+  text-align: right;
+  margin-top: 5px;
+}
+
+.message-sender,
+.message-receiver {
+  font-size: 0.8em;
+  color: #aaa;
+  display: block;
+  text-align: right;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.message-receiver {
+  text-align: left;
+  margin-left: 60px
+}
+
+      .avatar {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%; /* opcional: para tornar a imagem redonda */
+}
 </style>
 
-
-<div class="chat-container">
+<div class="chat-container-django">
+  <div class="chat-messages">
     <!-- Exibição das mensagens existentes -->
     {% for mensagem in mensagens %}
-    <div class="message {% if mensagem.remetente_email == user.email %}sent{% else %}received{% endif %}">
-        <p>{{ mensagem.descricao }}</p>
+    <div class="chat-message-django {% if mensagem.remetente_email == user.email %}sent{% else %}received{% endif %}">
+      {% if mensagem.remetente_email != user.email %}
+      <img src="{{ destinatario.foto_perfil.url }}" alt="Foto do usuário" class="user-photo-django avatar">
+      {% endif %}
+      <div class="message-bubble-django">{{ mensagem.descricao }}</div>
     </div>
+    {% if mensagem.remetente_email == user.email %}
+    <span class="message-sender">{{ mensagem.data_envio }}</span>
+    {% else %}
+    <span class="message-receiver">{{ mensagem.data_envio }}</span>
+    {% endif %}
     {% endfor %}
+  </div>
 
-    <!-- Formulário para enviar nova mensagem -->
-    <form method="post" action="">
-        {% csrf_token %}
-        <input type="hidden" name="remetente_email" value="{{ user.email }}">
-        <input type="hidden" name="destinatario_email" value="{{ email }}">
-        <div class="input-group mb-3">
-            <input type="text" name="descricao" class="form-control" placeholder="Digite sua mensagem" aria-label="Digite sua mensagem" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="submit">Enviar</button>
-            </div>
-        </div>
-    </form>
+  <!-- Formulário para enviar nova mensagem -->
+  <form method="post" action="">
+    {% csrf_token %}
+    <div class="chat-input-container">
+      <input type="hidden" name="remetente_email" value="{{ user.email }}">
+      <input type="hidden" name="destinatario_email" value="{{ email }}">
+      <input type="text" name="descricao" class="chat-input" placeholder="Digite sua mensagem...">
+      <button type="submit" class="chat-send-button">&#9658;</button>
+    </div>
+  </form>
 </div>
 
 

@@ -6,8 +6,8 @@
         <h2>Conversas</h2>
         <div class="conversations">
             {% for conversa in conversas %}
-            <a href="{% url 'chat' conversa.destinatario%}"><div class="conversation">
-                <img src="https://via.placeholder.com/50" alt="Avatar">
+            <a href="{% url 'chat' conversa.destinatario.email %}"><div class="conversation">
+                <img class="avatar" src="{{conversa.destinatario.foto_perfil.url}}" alt="Avatar">
                 <div class="conversation-details">
                     <h3>{{ conversa.destinatario }}</h3>
                     <p>{{ conversa.ultima_mensagem }}</p>
@@ -18,5 +18,14 @@
         </div>
     </section>
 </main>
+
+<style>
+    .avatar {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%; /* opcional: para tornar a imagem redonda */
+}
+</style>
 
 {% endblock %}

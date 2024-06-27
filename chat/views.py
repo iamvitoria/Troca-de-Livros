@@ -1,14 +1,14 @@
 from django.views.generic import TemplateView, ListView
 from django.http import HttpResponseRedirect
-from django.urls import reverse
-
-from django.views.generic import ListView
 from django.db.models import Q
-from .models import Mensagem
 
 from django.views.generic import ListView, DeleteView
 from django.urls import reverse_lazy
 from .models import Mensagem
+
+from django.shortcuts import get_object_or_404
+from django.urls import reverse
+from usuario.models import Usuario  # Importe o modelo Usuario do app usuario
 
 class MensagemListView(ListView):
     model = Mensagem
@@ -20,9 +20,6 @@ class MensagemDeleteView(DeleteView):
     success_url = reverse_lazy('mensagem-list')
     template_name = 'mensagem_confirm_delete.html'
 
-from django.db.models import Q
-from django.views.generic import ListView
-from .models import Mensagem
 
 class ConversasView(ListView):
     model = Mensagem
@@ -30,7 +27,7 @@ class ConversasView(ListView):
     context_object_name = 'conversas'
 
     def get_queryset(self):
-        email_usuario = self.request.user.email  # Obtém o email do usuário autenticado
+        email_usuario = self.request.user.email
 
         # Busca todos os emails que aparecem nos campos remetente_email ou destinatario_email
         emails = Mensagem.objects.filter(
@@ -53,8 +50,11 @@ class ConversasView(ListView):
             ).order_by('-data_envio').first()
 
             if ultima_mensagem:
+                # Busca o usuário destinatário
+                destinatario = get_object_or_404(Usuario, email=contato)
+
                 conversa = {
-                    'destinatario': contato,
+                    'destinatario': destinatario,
                     'ultima_mensagem': ultima_mensagem.descricao,
                     'data_envio': ultima_mensagem.data_envio
                 }
@@ -65,13 +65,17 @@ class ConversasView(ListView):
         return conversas
 
 
+
+
+
+
 class ChatView(TemplateView):
     template_name = 'chat.html'
     context_object_name = 'mensagens'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        remetente_email = self.request.user.email  # Assumindo que você está usando o usuário autenticado
+        remetente_email = self.request.user.email
         destinatario_email = self.kwargs['email']
 
         # Busca todas as mensagens trocadas entre o remetente e o destinatário
@@ -82,9 +86,13 @@ class ChatView(TemplateView):
         mensagens = list(mensagens_enviadas) + list(mensagens_recebidas)
         mensagens.sort(key=lambda x: x.data_envio)
 
+        # Busca o usuário destinatário
+        destinatario = get_object_or_404(Usuario, email=destinatario_email)
+
         context['mensagens'] = mensagens
-        context['email'] = destinatario_email  # Passa o email do destinatário para o template
-        context['user'] = self.request.user  # Passa o objeto do usuário autenticado para o template
+        context['email'] = destinatario_email
+        context['user'] = self.request.user
+        context['destinatario'] = destinatario  # Passa o objeto do usuário destinatário para o template
         return context
 
     def post(self, request, *args, **kwargs):
