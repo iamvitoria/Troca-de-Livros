@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .center-content {
+
+    text-align: center; /* alinha o texto no centro caso haja */
+}
+
+</style>
+<main class="center-content">
+    <h2>Confirmar Exclusão</h2>
+    <p>Tem certeza de que deseja excluir "{{ object.titulo }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="delete-button">Sim, excluir</button>
+        <a class="contact-button" href="{% url 'detalhes_livro' object.pk %}">Cancelar</a>
+    </form>
+</main>
+{% endblock %}

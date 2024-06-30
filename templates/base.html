@@ -12,11 +12,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <style>
-        .books {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
+.books {
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: space-between; Removido para evitar distribuição desigual */
+}
         .book {
             flex: 1 0 21%;
             margin: 10px;
@@ -307,7 +307,7 @@ footer div {
 }
 
 .card {
-    width: calc(25% - 20px); /* Calcula o tamanho do card com margens */
+    width: calc(25% - 20px); /* Ajuste conforme necessário */
     margin-bottom: 20px;
     background-color: #ffffff;
     border: 1px solid #ddd;
@@ -423,6 +423,17 @@ footer div {
     font-size: 1em;
 }
 
+.delete-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #d43e0d;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
 .contact-button:hover {
     background-color: #2c3e50;
 }
@@ -440,6 +451,13 @@ footer div {
     .book-info h2 {
         text-align: center;
     }
+}
+
+              .avatar {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%; /* opcional: para tornar a imagem redonda */
 }
     </style>
 </head>

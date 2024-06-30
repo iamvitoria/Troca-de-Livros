@@ -1,26 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Perfil</title>
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
     .editar-perfil-section {
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh;
+        min-height: calc(100vh - 200px); /* Ajuste conforme a altura do seu header e footer */
         padding: 20px;
     }
 
@@ -33,24 +19,27 @@
         width: 100%;
     }
 
-    h2 {
+    .editar-perfil-container h2 {
         margin-bottom: 20px;
         color: #333;
         text-align: center;
     }
 
-    form div {
+    .editar-perfil-container form div {
         margin-bottom: 15px;
         text-align: left;
     }
 
-    label {
+    .editar-perfil-container label {
         display: block;
         margin-bottom: 5px;
         color: #555;
     }
 
-    input[type="text"], input[type="email"], input[type="number"], input[type="file"] {
+    .editar-perfil-container input[type="text"],
+    .editar-perfil-container input[type="email"],
+    .editar-perfil-container input[type="number"],
+    .editar-perfil-container input[type="file"] {
         width: calc(100% - 20px);
         padding: 10px;
         margin-top: 5px;
@@ -60,7 +49,8 @@
         box-sizing: border-box;
     }
 
-    input[type="submit"], button {
+    .editar-perfil-container input[type="submit"],
+    .editar-perfil-container button {
         background-color: #007bff;
         color: white;
         border: none;
@@ -73,12 +63,13 @@
         margin: 0 auto;
     }
 
-    input[type="submit"]:hover, button:hover {
+    .editar-perfil-container input[type="submit"]:hover,
+    .editar-perfil-container button:hover {
         background-color: #0056b3;
     }
 </style>
-</head>
-<body>
+
+<div class="editar-perfil-section">
     <div class="editar-perfil-container">
         <h2>Editar Perfil</h2>
         <form method="post" enctype="multipart/form-data">
@@ -89,26 +80,26 @@
             </div>
         </form>
     </div>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            document.getElementById("id_cep").addEventListener("change", function() {
-                var cep = this.value;
-                var cepUrl = 'http://viacep.com.br/ws/' + cep + '/json/';
+</div>
 
-                fetch(cepUrl)
-                    .then(response => response.json())
-                    .then(data => {
-                        document.getElementById("id_endereco").value = data.logradouro || '';
-                        document.getElementById("id_numero").value = data.numero || '';
-                        document.getElementById("id_complemento").value = '';
-                        document.getElementById("id_bairro").value = data.bairro || '';
-                        document.getElementById("id_cidade").value = data.localidade || '';
-                        document.getElementById("id_estado").value = data.uf || '';
-                    })
-                    .catch(error => console.error('Erro ao buscar o endereço:', error));
-            });
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("id_cep").addEventListener("change", function() {
+            var cep = this.value;
+            var cepUrl = 'http://viacep.com.br/ws/' + cep + '/json/';
+
+            fetch(cepUrl)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("id_endereco").value = data.logradouro || '';
+                    document.getElementById("id_numero").value = data.numero || '';
+                    document.getElementById("id_complemento").value = '';
+                    document.getElementById("id_bairro").value = data.bairro || '';
+                    document.getElementById("id_cidade").value = data.localidade || '';
+                    document.getElementById("id_estado").value = data.uf || '';
+                })
+                .catch(error => console.error('Erro ao buscar o endereço:', error));
         });
-    </script>
-</body>
-</html>
+    });
+</script>
 {% endblock %}

@@ -8,7 +8,15 @@
             <h2 id="book-title">{{ livro.titulo }} </h2>
             <p id="book-author">Autor: {{ livro.autor }}</p>
             <p id="book-description">{{ livro.descricao }}</p>
+
+            {% if livro.usuario == user.email %}
+            <a href="{% url 'livro_edit' livro.pk %}"><button class="contact-button">Editar Livro</button></a>
+            <a href="{% url 'livro_delete' livro.pk %}"><button class="delete-button">Excluir Livro</button></a>
+            {% else %}
             <a href="{% url 'chat' livro.usuario %}"><button class="contact-button">Entrar em contato</button></a>
+            {% endif %}
+
+
         </div>
     </section>
 </main>

@@ -7,7 +7,7 @@
     <section class="profile-section">
         <div class="profile-header">
             {% if user.foto_perfil %}
-                <img src="{{ user.foto_perfil.url }}" alt="Foto do perfil" width="100" height="100">
+                <img src="{{ user.foto_perfil.url }}" class="avatar" alt="Foto do perfil" width="100" height="100">
             {% else %}
                 <img src="{% static 'caminho/para/imagem/padrao.png' %}" alt="Foto do perfil" width="100" height="100">
             {% endif %}

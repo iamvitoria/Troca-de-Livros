@@ -1,11 +1,24 @@
 from django.views.generic import TemplateView
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, UpdateView, DeleteView
 from .models import Livro
 from .forms import LivroForm
 from django.db.models import Q
 
+
+class LivroUpdateView(UpdateView):
+    model = Livro
+    form_class = LivroForm
+    template_name = 'livro_edit.html'
+
+    def get_success_url(self):
+        return reverse_lazy('detalhes_livro', kwargs={'pk': self.object.pk})
+
+class LivroDeleteView(DeleteView):
+    model = Livro
+    template_name = 'livro_confirm_delete.html'
+    success_url = reverse_lazy('listar_livro')
 
 class IndexView(ListView):
     model = Livro

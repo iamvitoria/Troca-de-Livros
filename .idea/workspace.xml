@@ -5,11 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="59732024-576f-40b4-b3b5-673f633a45d4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/livro/templates/livro_confirm_delete.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/livro/templates/livro_edit.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chat/templates/chat.html" beforeDir="false" afterPath="$PROJECT_DIR$/chat/templates/chat.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat/templates/conversas.html" beforeDir="false" afterPath="$PROJECT_DIR$/chat/templates/conversas.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/chat/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/livro/templates/adicionar_livro.html" beforeDir="false" afterPath="$PROJECT_DIR$/livro/templates/adicionar_livro.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/livro/templates/detalhes_livro.html" beforeDir="false" afterPath="$PROJECT_DIR$/livro/templates/detalhes_livro.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/livro/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/livro/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/livro/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/livro/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usuario/templates/editar_perfil.html" beforeDir="false" afterPath="$PROJECT_DIR$/usuario/templates/editar_perfil.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usuario/templates/perfil.html" beforeDir="false" afterPath="$PROJECT_DIR$/usuario/templates/perfil.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,8 +27,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
